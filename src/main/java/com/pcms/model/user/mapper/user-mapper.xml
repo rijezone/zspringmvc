@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.pcms.model.user.mapper.UserMapper">
+<!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
+   <resultMap type="com.pcms.model.user.vo.UserVO" id="userResultMap">
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="userPass" column="userPass"/>
+        <result property="userDept" column="userDept"/>
+        <result property="userRole" column="userRole"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+    <select id="getAllUsers" resultMap="userResultMap">
+        <![CDATA[
+            select * from t_user
+        ]]>
+    </select>
+    <select id="queryUsers" resultMap="userResultMap" parameterType="java.util.Map">  
+            select * from t_user where 1=1 
+        <if test="queryName != null and queryName != ''">  
+            AND USERNAME like #{queryName}
+        </if> 
+     
+    </select>
+
+    <!-- userResultMap是user-resultmap.xml中定义的resultmap -->
+    <select id="getUserById" parameterType="string" resultMap="userResultMap">
+        <![CDATA[
+            select * from t_user where userId = #{userId}
+        ]]>
+    </select>
+
+    <!-- userResultMap是user-resultmap.xml中定义的resultmap，通过namespace.id找到 -->
+    <select id="getUserByNames" parameterType="string" resultMap="userResultMap">
+        <![CDATA[
+            select * from t_user where userName = #{userName}
+        ]]>
+    </select>
+
+    <!-- 自动生成id策略 -->
+    <insert id="addUser" parameterType="user">
+        insert into t_user(userId,userName, userPass, userDept,userRole,email,phone,createtime)
+        values(t_user_seq.nextval,#{userName}, #{userPass}, #{userDept}, #{userRole}, #{email}, #{phone},sysdate)
+    </insert>
+
+    <!-- 根据selectKey语句生成主键 -->
+    <!-- <insert id="addAccount4Key" parameterType="user">
+        <selectKey keyProperty="user_id" order="BEFORE" resultType="int">
+            select cast(random() * 10000 as Integer) a from #Tab
+        </selectKey>
+        insert into user(user_id, status, username, password)
+        values(#{userId}, #{status}, #{username}, #{password})
+    </insert>
+ -->
+    <update id="editUser" parameterType="user">
+        update t_user set
+        userName = #{userName},
+        userPass = #{userPass},
+        userDept = #{userDept},
+        userRole = #{userRole},
+        email = #{email},
+        phone = #{phone},
+        updatetime=sysdate
+        where userId = #{userId}
+    </update>
+
+    <delete id="removeUser" parameterType="user">
+        delete from t_user where userId = #{userId}
+    </delete>
+</mapper>
+
+
