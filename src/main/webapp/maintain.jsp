@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="GB2312">
 <title>Complex Layout - jQuery EasyUI Demo</title>
 <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="themes/icon.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
 	window.onload = function() {
 		//alert(window.screen.height);
@@ -87,10 +87,10 @@ function refreshTab(cfg){
 		<div style="margin:20px 0;"></div>
 	</div>
 	
-	<div data-options="region:'west',title:'West',split:true"
+	<div data-options="region:'west',title:'菜单导航',split:true"
 		style="width:150px;">
 		<div class="easyui-accordion" data-options="fit:true,border:false">
-			<div title="Title1" style="padding:10px;"
+			<div title="系统管理" style="padding:10px;"
 				data-options="selected:true">
 				<a href="javascript:void(0);" onclick="addTab('kd','userController/initMain.do','a')">User Management</a>
 			</div>

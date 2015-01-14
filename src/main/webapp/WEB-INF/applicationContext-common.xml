@@ -14,21 +14,21 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> <property 
 		name="url" value="jdbc:mysql://127.0.0.1:3306/pcms"/> <property name="username" 
 		value="root"/> <property name="password" value="root"/> </bean> -->
-	<!--		
+		
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:pcms" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
- 	 -->
+ 	<!--
 	 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 172.17.12.37)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = orcl) ) )" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
-
+	 -->
 	<!-- 配置SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
