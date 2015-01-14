@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+	<!-- 配置DataSource数据源 -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> <property 
+		name="url" value="jdbc:mysql://127.0.0.1:3306/pcms"/> <property name="username" 
+		value="root"/> <property name="password" value="root"/> </bean> -->
+	<!--		
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:pcms" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+ 	 -->
+	 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 172.17.12.37)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = orcl) ) )" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<!-- 配置SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
+	</bean>
+
+	<!-- 单独配置一个Mapper； 这种模式就是得给每个mapper接口配置一个bean -->
+	<!-- <bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+		<property name="mapperInterface" value="com.hoo.mapper.AccountMapper" /> 
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> </bean> <bean 
+		id="companyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> <property 
+		name="mapperInterface" value="com.hoo.mapper.CompanyMapper" /> <property 
+		name="sqlSessionFactory" ref="sqlSessionFactory" /> </bean> -->
+
+
+	<!-- 通过扫描的模式，扫描目录在com/hoo/mapper目录下，所有的mapper都继承SqlMapper接口的接口， 这样一个bean就可以了 -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+		<property name="basePackage" value="com.pcms.model.user.mapper" />
+
+		<property name="markerInterface" value="com.pcms.model.SqlMapper" />
+
+	</bean>
+</beans>
+

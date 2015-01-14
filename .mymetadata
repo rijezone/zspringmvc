@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="zspringmvc"
+  id="myeclipse.1420534874160"
+  context-root="/zspringmvc"
+  j2ee-spec="5.0"
+  archive="zspringmvc.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
