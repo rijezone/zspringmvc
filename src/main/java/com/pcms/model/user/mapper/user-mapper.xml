@@ -6,13 +6,15 @@
 <mapper namespace="com.pcms.model.user.mapper.UserMapper">
 <!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
    <resultMap type="com.pcms.model.user.vo.UserVO" id="userResultMap">
-        <result property="userId" column="userId"/>
-        <result property="userName" column="userName"/>
-        <result property="userPass" column="userPass"/>
-        <result property="userDept" column="userDept"/>
-        <result property="userRole" column="userRole"/>
+        <result property="userId" column="userid"/>
+        <result property="userName" column="username"/>
+        <result property="userPass" column="userpass"/>
+        <result property="userDept" column="userdept"/>
+        <result property="userRole" column="userrole"/>
         <result property="email" column="email"/>
         <result property="phone" column="phone"/>
+        <result property="createTime" column="createtime"/>
+        <result property="updateTime" column="updatetime"/>
     </resultMap>
 
     <select id="getAllUsers" resultMap="userResultMap">
@@ -21,11 +23,13 @@
         ]]>
     </select>
     <select id="queryUsers" resultMap="userResultMap" parameterType="java.util.Map">  
-            select * from t_user where 1=1 
+            select userid,username,userpass,userdept,userrole,email,phone,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_user where 1=1 
         <if test="queryName != null and queryName != ''">  
             AND USERNAME like #{queryName}
         </if> 
-     
+        <if test="createTime!=null and createTime!=''">
+            and createtime >= to_date(#{createTime},'yyyy-MM-dd')
+        </if>
     </select>
 
     <!-- userResultMap是user-resultmap.xml中定义的resultmap -->
@@ -36,7 +40,7 @@
     </select>
 
     <!-- userResultMap是user-resultmap.xml中定义的resultmap，通过namespace.id找到 -->
-    <select id="getUserByNames" parameterType="string" resultMap="userResultMap">
+    <select id="findByUsername" parameterType="string" resultMap="userResultMap">
         <![CDATA[
             select * from t_user where userName = #{userName}
         ]]>

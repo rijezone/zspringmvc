@@ -1,8 +1,10 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8"%> 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="GB2312">
-<title>Complex Layout - jQuery EasyUI Demo</title>
+<meta charset="utf-8">
+<title>Dream Zone</title>
 <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="themes/icon.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -79,7 +81,7 @@ function refreshTab(cfg){
 </script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',title:'North Title',split:true"
+	<div data-options="region:'north',title:'',split:true,collapsible:false"
 		style="height:150px;">
 		<div id="cc"></div>
 		<h2>Complex Layout</h2>
@@ -92,7 +94,7 @@ function refreshTab(cfg){
 		<div class="easyui-accordion" data-options="fit:true,border:false">
 			<div title="系统管理" style="padding:10px;"
 				data-options="selected:true">
-				<a href="javascript:void(0);" onclick="addTab('kd','userController/initMain.do','a')">User Management</a>
+				<a href="javascript:void(0);" onclick="addTab('kd','userController/initMain.do','a')">用户管理</a>
 			</div>
 			<div title="Title2" style="padding:10px;">content2</div>
 			<div title="Title3" style="padding:10px">content3</div>
@@ -103,7 +105,7 @@ function refreshTab(cfg){
 		style="padding:5px;background:#eee;">
 		<div id="tt" class="easyui-tabs"
 			data-options="fit:true,border:false,plain:true">
-			<div title="About" data-options="href:'test.jsp'"
+			<div title="About" data-options="href:''"
 				style="padding:10px"></div>
 			<div title="DataGrid" style="padding:5px">
 				<table class="easyui-datagrid"

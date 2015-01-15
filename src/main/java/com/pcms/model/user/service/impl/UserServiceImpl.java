@@ -16,15 +16,24 @@ import com.pcms.model.user.vo.UserVO;
 public class UserServiceImpl implements UserService{
 	@Inject
 	private UserDao dao;
+
+	public List getAllUsers() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return dao.getAllUsers();
+	}
+	public <T> List queryUsers(T entity) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return dao.queryUsers(entity);
+	}
+	public UserVO findByUsername(String username) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return dao.findByUsername(username);
+	}
 	public <T> boolean addUser(T entity) throws DataAccessException {
 		if (entity == null) {
 			throw new BizException(UserVO.class.getName() + "���������ϢΪEmpty��");
 		}
 		return dao.addUser(entity);
-	}
-	public List getAllUsers() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return dao.getAllUsers();
 	}
 	public <T> boolean editUser(T entity) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -34,8 +43,5 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return dao.removeUser(entity);
 	}
-	public <T> List queryUsers(T entity) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return dao.queryUsers(entity);
-	}
+
 }

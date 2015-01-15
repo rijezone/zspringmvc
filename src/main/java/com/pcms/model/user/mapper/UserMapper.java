@@ -21,8 +21,7 @@ public interface UserMapper extends SqlMapper{
 	
 	public List queryUsers(Map<String,Object> entity);
 	 
-	@Select("select * from t_user where userName = #{userName}")
-    public UserVO getUserByName(String userName);
+    public UserVO findByUsername(String userName);
     
     public void addUser(UserVO userVO);
 

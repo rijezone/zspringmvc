@@ -70,7 +70,7 @@
         },
         {
             field: 'createTime',
-            title: 'updateTime',
+            title: 'createTime',
 			width: 100,
             align: 'right'
         },
@@ -284,6 +284,25 @@ o[this['name']] = this['value'];
 return o;
 };
  	
+ 	
+function myformatter(date){
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    var d = date.getDate();
+    return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
+function myparser(s){
+    if (!s) return new Date();
+    var ss = (s.split('-'));
+    var y = parseInt(ss[0],10);
+    var m = parseInt(ss[1],10);
+    var d = parseInt(ss[2],10);
+    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+        return new Date(y,m-1,d);
+    } else {
+        return new Date();
+    }
+}
 //]]>	
 </script>
  <style type="text/css">
@@ -325,10 +344,8 @@ return o;
 </tr>
 <tr>
 <th>创建开始时间：</th>
-<td><input class="easyui-datetimebox" editable="false" name="subStartTime" /></td>
+<td><input class="easyui-datebox" editable="false" name="createTime"  data-options="formatter:myformatter,parser:myparser"/></td>
 <!--由于datebox框架上面的数据必须是时间格式的，所以我们用editable="false"来禁止用户手动输入，以免报错-->
-<th>创建结束时间：</th>
-<td><input class="easyui-datetimebox" editable="false" name="nsubEndTimeame" /></td>
 <td><a class="easyui-linkbutton" href="javascript:void(0);" onclick="searchFunc();">查找</a></td>
 <td><a class="easyui-linkbutton" href="javascript:void(0);" onclick="clearSearch();">清空</a></td>
 </tr>

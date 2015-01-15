@@ -3,12 +3,16 @@
  */
 package com.pcms.controller.user;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
@@ -17,9 +21,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pcms.common.BaseControl;
 import com.pcms.model.user.service.UserService;
 import com.pcms.model.user.vo.UserVO;
 
@@ -29,7 +35,7 @@ import com.pcms.model.user.vo.UserVO;
  */
 @Controller
 @RequestMapping("/userController")
-public class UserController {
+public class UserController extends BaseControl{
 
     @Inject
     private UserService userService;
@@ -39,11 +45,23 @@ public class UserController {
         return "/operator.jsp";
     }
 	
-	@RequestMapping(value="/getUsersInJSON")  
-    public @ResponseBody List<UserVO> getUsersInJSON(@RequestParam String queryName) {  
+	@RequestMapping(value="/getUsersInJSON",method=RequestMethod.POST)  
+    public @ResponseBody List<UserVO> getUsersInJSON(HttpServletRequest request, HttpServletResponse response) {  
+		String queryName = request.getParameter("queryName");
+		String createTime = request.getParameter("createTime");
+		if(createTime!=null&&!createTime.equals("")){
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				System.out.println(df.parse(createTime));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		System.out.println(queryName);
 		Map<String,String> map = new HashMap<String,String>();
-		map.put("queryName", "%"+queryName+"%");
+		map.put("queryName",queryName==null?null:"%"+queryName+"%");
+		map.put("createTime", createTime);
         List<UserVO> list = userService.queryUsers(map);  
         return list;  
     } 

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.pcms.model.user.dao.UserDao;
@@ -18,11 +19,21 @@ public class UserDaoImpl implements UserDao{
 	@Inject
     private UserMapper mapper;
 
-	public List getAllUsers() throws DataAccessException {
+	public List<?> getAllUsers() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return (List) mapper.getAllUsers();
+		return (List<?>) mapper.getAllUsers();
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T> List<?> queryUsers(T entity) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return (List<?>) mapper.queryUsers((Map<String, Object>) entity);
+	}
+
+	public UserVO findByUsername(String username) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return mapper.findByUsername(username);
+	}
 	public <T> boolean addUser(T entity) throws DataAccessException {
 		// TODO Auto-generated method stub
 		boolean flag = false;
@@ -62,8 +73,4 @@ public class UserDaoImpl implements UserDao{
         return flag;
 	}
 
-	public <T> List queryUsers(T entity) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return (List) mapper.queryUsers((Map<String, Object>) entity);
-	}
 }

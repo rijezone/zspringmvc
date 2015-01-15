@@ -5,12 +5,11 @@
 package com.pcms.common;
 
 /**
- * @description 
+ * @description 控制类基类
  * @author zhuming
  * @version 2015 3:19:46 PM
  */
 public class BaseControl {
-	//&page=2&rows=10&sort=userName&order=asc
 	protected String page;
 	protected String rows;
 	protected String sort;
