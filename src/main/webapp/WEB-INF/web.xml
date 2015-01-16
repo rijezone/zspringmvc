@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name></display-name>
 	<welcome-file-list>
-		<welcome-file>views/login.jsp</welcome-file>
+		<welcome-file>views/login/login.jsp</welcome-file>
 	</welcome-file-list>
 
 	  <context-param>  

@@ -35,7 +35,7 @@ public class UserController extends BaseControl{
 
     @RequestMapping("/initMain")
     public String initMain(Model model) {
-        return "/operator.jsp";
+        return "/views/operator/operator.jsp";
     }
 	
 	@RequestMapping(value="/getUsersInJSON",method=RequestMethod.POST)  

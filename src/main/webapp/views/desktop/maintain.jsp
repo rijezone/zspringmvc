@@ -1,14 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html; charset=utf-8"%> 
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Dream Zone</title>
-<link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="themes/icon.css">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.min.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/themes/icon.css">
+<script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery.easyui.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
 	window.onload = function() {
 		//alert(window.screen.height);
@@ -50,7 +54,7 @@
        	 	refreshTab({tabTitle:title,url:href});
 	} else {
     	if (href){
-	    	var content = '<iframe scrolling="no" frameborder="0"  src="'+href+'" style="width:100%;height:100%;"></iframe>';
+	    	var content = '<iframe scrolling="no" frameborder="0"  src="<%=path%>/'+href+'" style="width:100%;height:100%;"></iframe>';
     	} else {
 	    	var content = '未实现';
     	}
@@ -81,7 +85,7 @@ function refreshTab(cfg){
 </script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',title:'',split:true,collapsible:false"
+	<div data-options="region:'north',title:'',split:true,collapsible:false,href:''"
 		style="height:150px;">
 		<div id="cc"></div>
 		<h2>Complex Layout</h2>

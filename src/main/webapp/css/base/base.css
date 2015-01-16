@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* base */
+
+body { background-color: #fff; color: #000; font-size: 12px; font-family: 宋体, arial, Times, serif; line-height: 1.25; margin: 0; padding: 0; height: 100%; word-break: break-all; }
+body, div, dl, dt, dd, ul, ol, li, form, fieldset, input, textarea, p, blockquote, th, td { padding: 0; margin: 0; font-size: 12px; font-weight: normal; }
+
+/*font color*/
+.hand { cursor: pointer; }
+a { color: #000; text-decoration: none; outline: none; }
+a:hover { color: #36F; text-decoration: underline; }
+a.hand:hover { text-decoration: underline; }
+
+/* layout */
+.mT2 { margin-top: 2px; }
+.mT5 { margin-top: 5px; }
+.mT8 { margin-top: 8px; }
+.mT10 { margin-top: 10px; }
+.p5 { padding: 5px; }
+.p8 { padding: 8px; }
+.p10 { padding: 10px; }
+.plr10 { padding-left: 10px; padding-right: 10px; }
+.pr5 { padding-right: 5px; }
+.ti15 { text-indent: 15px; }
+.fl { float: left; }
+.fr { float: right; }
+.line21 { line-height: 21px; }
+.line24 { line-height: 24px; }
+.line-d { line-height: 28px; border-bottom: 1px dashed #69c; }
+.line-d140 { line-height: 140%; border-bottom: 1px dotted #ccc; }
+.line-b { border-bottom: 1px solid #369; }
+.line-b2 { border-bottom: 2px solid #ccc; }
+.line-b-g { border-bottom: 1px solid #ccc; border-right: none; border-left: none; border-top: none; }
+.s4b { border: 1px solid #92c3f2; }
+.s3b { border-left: 1px solid #92c3f2; border-right: 1px solid #92c3f2; border-top: 1px solid #92c3f2; border-bottom: hidden; }
+.side4 { border: 1px solid #d5d5d5; }
+.line-mid { background: url(images/line-mid.gif) repeat-x; }
+.line-dashed { border-bottom: 1px solid #09F; }
+.vm { vertical-align: middle; }
+.ud { text-decoration: underline; }
+.none { display: none; }
+
+/*head*/
+/*logo*/
+.head-bg { background: #cde7f8 url(images/top-bg.png) no-repeat bottom left; height: 58px; }
+.logo { background: url(images/logo.png) no-repeat bottom left; height: 58px; width: 562px; float: left; }
+.logo-right { float: right; height: 26px; line-height: 26px; color: #000; }
+.logo-test, .logo-test a { }
+
+/*list*/
+.tab td { padding-left: 5px; padding-right: 5px; line-height: 18px; height: 21px; }
+.tab-ld td, .tab-ld th { border-bottom: 1px dashed #dadada; padding: 3px 0; }
+.tab-ld th { text-align: left; }
+.dataGridtool { border: 1px solid #c8c8c8; border-bottom: none; background: url(images/title-bg.png) 0 -150px; height: 25px; line-height: 25px; padding-left: 5px; }
+.dataGrid { border: 1px solid #c8c8c8; }
+.dataGrid thead tr th { background: url(images/title-bg.png) repeat-x 0 -200px; line-height: 24px; border: 1px solid #c8c8c8; }
+.dataGrid thead tr td { background: url(images/title-bg.png) repeat-x 0 -200px; border: 1px solid #c8c8c8; padding: 3px 5px; line-height: 22px; }
+.dataGrid tbody tr th { border: 1px solid #c8c8c8; padding: 3px 5px; }
+.dataGrid tbody tr td { border: 1px solid #c8c8c8; padding: 3px 5px; border-left: none; border-right: none; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; otextoverflow: ellipsis; }
+.dataGrid a { color: #0033ff; }
+.dataGridOver { background: #e4fcf9; }
+.dataGridWRow { background: #fbfafa; }

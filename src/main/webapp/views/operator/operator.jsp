@@ -35,7 +35,7 @@
         },
         {
             field: 'userName',
-            title: 'userName',
+            title: '姓名',
             width: 200
         },
         {
@@ -46,13 +46,13 @@
         },
         {
             field: 'userRole',
-            title: 'userRole',
+            title: '角色',
             width: 100,
             align: 'right'
         },
 		{
             field: 'phone',
-            title: 'phone',
+            title: '电话',
             width: 150,
             align: 'right'
         },
@@ -64,19 +64,19 @@
         },
         {
             field: 'userDept',
-            title: 'userDept',
+            title: '部门',
 			width: 500,
             align: 'right'
         },
         {
             field: 'createTime',
-            title: 'createTime',
+            title: '新建时间',
 			width: 100,
             align: 'right'
         },
         {
             field: 'updateTime',
-            title: 'updateTime',
+            title: '更新时间',
 			width: 100,
             align: 'right'
         }
