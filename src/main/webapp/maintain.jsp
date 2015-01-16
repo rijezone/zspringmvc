@@ -94,7 +94,7 @@ function refreshTab(cfg){
 		<div class="easyui-accordion" data-options="fit:true,border:false">
 			<div title="系统管理" style="padding:10px;"
 				data-options="selected:true">
-				<a href="javascript:void(0);" onclick="addTab('kd','userController/initMain.do','a')">用户管理</a>
+				<a href="javascript:void(0);" onclick="addTab('用户管理','userController/initMain.do','a')">用户管理</a>
 			</div>
 			<div title="Title2" style="padding:10px;">content2</div>
 			<div title="Title3" style="padding:10px">content3</div>
