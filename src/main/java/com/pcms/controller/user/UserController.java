@@ -49,15 +49,6 @@ public class UserController extends BaseControl{
     public @ResponseBody List<UserVO> getUsersInJSON(HttpServletRequest request, HttpServletResponse response) {  
 		String queryName = request.getParameter("queryName");
 		String createTime = request.getParameter("createTime");
-		if(createTime!=null&&!createTime.equals("")){
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			try {
-				System.out.println(df.parse(createTime));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		System.out.println(queryName);
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("queryName",queryName==null?null:"%"+queryName+"%");
