@@ -43,9 +43,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 		UserDetails user = null;
 		try {
-			String sql = "select userid,username,userpass,userdept,userrole,email,phone,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_user where u.userName=?";
+			String sql = "select userid,username,userpass,userdept,userrole,email,phone,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_user where username=?";
 		    Object[] args = new Object[] { username };  
-	        UserVO u = jdbcTemplate.queryForObject(sql, args, new BeanPropertyRowMapper(UserVO.class));
+	        UserVO u = jdbcTemplate.queryForObject(sql, args, new BeanPropertyRowMapper<UserVO>(UserVO.class));
 	        System.out.println(u);
 			// Populate the Spring User object with details from the dbUser
 			// Here we just pass the username, password, and access level
