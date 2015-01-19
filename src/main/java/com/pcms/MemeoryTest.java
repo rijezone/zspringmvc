@@ -13,7 +13,7 @@ public class MemeoryTest {
      * @param args
      */
    public static void main(String[] args) {
-      System. out .println( " 内存信息 :" + toMemoryInfo ());
+      System. out .println( "内存信息 :" + toMemoryInfo ());    
    }
 
    /**
