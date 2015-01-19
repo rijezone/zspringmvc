@@ -85,7 +85,7 @@ function refreshTab(cfg){
 </script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',title:'',split:true,collapsible:false,href:''"
+	<div data-options="region:'north',title:'top',split:true,collapsible:false,href:''"
 		style="height:150px;">
 		<div id="cc"></div>
 		<h2>Complex Layout</h2>
@@ -99,13 +99,15 @@ function refreshTab(cfg){
 			<div title="系统管理" style="padding:10px;"
 				data-options="selected:true">
 				<a href="javascript:void(0);" onclick="addTab('用户管理','userController/initMain.do','a')">用户管理</a>
+				<br>
+				<a href="javascript:void(0);" onclick="addTab('用户管理','deptController/initMain.do','a')">部门管理</a>
 			</div>
 			<div title="Title2" style="padding:10px;">content2</div>
 			<div title="Title3" style="padding:10px">content3</div>
 		</div>
 	</div>
 	
-	<div data-options="region:'center',title:'center title'"
+	<div data-options="region:'center',title:'工作区'"
 		style="padding:5px;background:#eee;">
 		<div id="tt" class="easyui-tabs"
 			data-options="fit:true,border:false,plain:true">

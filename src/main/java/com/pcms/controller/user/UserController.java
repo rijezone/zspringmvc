@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pcms.common.BaseControl;
+import com.pcms.common.base.controller.BaseControl;
 import com.pcms.model.user.service.UserService;
 import com.pcms.model.user.vo.UserVO;
 

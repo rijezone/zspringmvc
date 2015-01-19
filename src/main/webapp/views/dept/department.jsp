@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User Management</title>
+<title>Department Management</title>
 <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../themes/icon.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -12,7 +12,7 @@
     var editFlag = undefined;//设置一个编辑标记
 	function initData() {
     $('#dg').datagrid({
-        url: 'getUsersInJSON.do',
+        url: 'getDatasInJSON.do',
         iconCls: "icon-add",
         fitColumns: false,//设置为true将自动使列适应表格宽度以防止出现水平滚动,false则自动匹配大小     
         idField: 'id', //标识列，一般设为id，可能会区分大小写，大家注意一下
@@ -21,54 +21,41 @@
         rownumbers: true, //显示行数 1，2，3，4...
         pageSize: 10, //读取分页条数，即向后台读取数据时传过去的值
         pageList: [10, 20, 30], //可以调整每页显示的数据，即调整pageSize每次向后台请求数据时的数据
-        sortName: "userName", //初始化表格时依据的排序 字段 必须和数据库中的字段名称相同
+        sortName: "deptName", //初始化表格时依据的排序 字段 必须和数据库中的字段名称相同
         sortOrder: "asc", //正序
 		singleSelect:true,
 		queryParams: {
 			queryName:""
 		},
         columns: [[{
-            field: 'userId',
-            title: 'userId',
+            field: 'id',
+            title: 'id',
 			hidden:true,
             width: 100
         },
         {
-            field: 'userName',
-            title: '姓名',
+            field: 'deptNo',
+            title: '部门编码',
             width: 200
         },
         {
-            field: 'userPass',
-            title: 'userPass',
+            field: 'deptName',
+            title: '部门名称',
+            width: 200
+        },
+        {
+            field: 'pNo',
+            title: '上级编码',
 			hidden:true,
             width: 200
         },
         {
-            field: 'userRole',
-            title: '角色',
+            field: 'deptDesc',
+            title: '部门描述',
             width: 100,
             align: 'right'
         },
 		{
-            field: 'phone',
-            title: '电话',
-            width: 150,
-            align: 'right'
-        },
-        {
-            field: 'email',
-            title: 'email',
-            width: 200,
-            align: 'right'
-        },
-        {
-            field: 'userDept',
-            title: '部门',
-			width: 500,
-            align: 'right'
-        },
-        {
             field: 'createTime',
             title: '新建时间',
 			width: 100,

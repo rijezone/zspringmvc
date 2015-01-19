@@ -2,7 +2,7 @@
  * @location com.pcms.commonBaseControl.java
  * @time 2015 3:19:46 PM 
  */
-package com.pcms.common;
+package com.pcms.common.base.controller;
 
 /**
  * @description 控制类基类

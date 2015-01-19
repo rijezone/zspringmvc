@@ -4,9 +4,11 @@
     <!-- 别名 -->
     <typeAliases>
         <typeAlias type="com.pcms.model.user.vo.UserVO" alias="user"/>
+        <typeAlias type="com.pcms.model.dept.vo.DeptVO" alias="dept"/>
     </typeAliases>
     <mappers>
     	<mapper resource="com/pcms/model/user/mapper/user-mapper.xml"/>
+    	<mapper resource="com/pcms/model/dept/mapper/dept-mapper.xml"/>
     </mappers>
 </configuration>
 

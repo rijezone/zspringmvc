@@ -19,10 +19,9 @@ import com.pcms.model.user.dao.impl.UserDaoImpl;
 import com.pcms.model.user.vo.UserVO;
 
 /**
- * 一个自定义的类用来和数据库进行操作. 即以后我们要通过数据库保存权限.则需要我们继承UserDetailsService
- * 
- * @author 
- * 
+ * @description 一个自定义的类用来和数据库进行操作. 即以后我们要通过数据库保存权限.则需要我们继承UserDetailsService
+ * @author zhuming
+ * @version 2015 3:19:46 PM
  */
 public class CustomUserDetailsService implements UserDetailsService {
 
