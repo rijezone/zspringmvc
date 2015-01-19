@@ -2,9 +2,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
        <head>
-              <title>test</title>
+              <title>首页</title>
        </head>
        <body>
-            ;alksdjf;alksjdf;alsjkdf;asjdf;akjsdf
+            首页
        </body>
 </html>
