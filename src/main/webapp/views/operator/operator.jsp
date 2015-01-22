@@ -370,7 +370,8 @@ $('#pp').pagination({
 						<th>用户姓名：</th>
 						<td><input name="queryName" />
 						</td>
-					</tr>
+					</tr>    
+					 
 					<tr>
 						<th>创建开始时间：</th>
 						<td><input class="easyui-datebox" editable="false"
