@@ -22,14 +22,16 @@
             select * from t_user
         ]]>
     </select>
-    <select id="queryUsers" resultMap="userResultMap" parameterType="java.util.Map">  
-            select userid,username,userpass,userdept,userrole,email,phone,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_user where 1=1 
+    <select id="queryUsers" resultMap="userResultMap" parameterType="java.util.Map"> 
+    select * from (
+            select rownum rn,userid,username,userpass,userdept,userrole,email,phone,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_user where 1=1 
         <if test="queryName != null and queryName != ''">  
             AND USERNAME like #{queryName}
         </if> 
         <if test="createTime!=null and createTime!=''">
             and createtime >= to_date(#{createTime},'yyyy-MM-dd')
         </if>
+      <![CDATA[  )a where a.rn>(#{curPage}-1)*#{pageSize} and a.rn<=#{curPage}*#{pageSize} ]]>
     </select>
 
     <!-- userResultMap是user-resultmap.xml中定义的resultmap -->
@@ -48,8 +50,8 @@
 
     <!-- 自动生成id策略 -->
     <insert id="addUser" parameterType="user">
-        insert into t_user(userId,userName, userPass, userDept,userRole,email,phone,createtime)
-        values(t_user_seq.nextval,#{userName}, #{userPass}, #{userDept}, #{userRole}, #{email}, #{phone},sysdate)
+        insert into t_user(userId,userName, userPass, userDept,userRole,email,phone,createtime,updatetime)
+        values(t_user_seq.nextval,#{userName}, #{userPass}, #{userDept}, #{userRole}, #{email}, #{phone},sysdate,sysdate)
     </insert>
 
     <!-- 根据selectKey语句生成主键 -->

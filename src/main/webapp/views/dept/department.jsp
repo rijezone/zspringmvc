@@ -1,9 +1,16 @@
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Department Management</title>
-<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="../themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../themes/icon.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
@@ -14,15 +21,14 @@
     $('#dg').datagrid({
         url: 'getDatasInJSON.do',
         iconCls: "icon-add",
-        fitColumns: false,//设置为true将自动使列适应表格宽度以防止出现水平滚动,false则自动匹配大小     
+        fit:true,
+        fitColumns: true,//设置为true将自动使列适应表格宽度以防止出现水平滚动,false则自动匹配大小     
         idField: 'id', //标识列，一般设为id，可能会区分大小写，大家注意一下
         loadMsg: "正在努力为您加载数据", //加载数据时向用户展示的语句
         pagination: true, //显示最下端的分页工具栏
         rownumbers: true, //显示行数 1，2，3，4...
         pageSize: 10, //读取分页条数，即向后台读取数据时传过去的值
         pageList: [10, 20, 30], //可以调整每页显示的数据，即调整pageSize每次向后台请求数据时的数据
-        sortName: "deptName", //初始化表格时依据的排序 字段 必须和数据库中的字段名称相同
-        sortOrder: "asc", //正序
 		singleSelect:true,
 		queryParams: {
 			queryName:""
@@ -145,6 +151,14 @@
 				
             }
         },
+        '-', {
+            text: "test",
+            iconCls: "icon-redo",
+            hidden:true,
+            handler: function() {
+            	showSelectPanel('initSelectDept.do','部门选择');
+            }
+        },
         '-'],
         onAfterEdit: function(rowIndex, rowData, changes) { //在添加完毕endEdit，保存时触发
             console.info(rowData); //在火狐浏览器的控制台下可看到传递到后台的数据，这里我们就可以利用这些数据异步到后台添加，添加完成后，刷新datagrid
@@ -203,17 +217,17 @@
     function newUser(){    
         $('#dlg').dialog('open').dialog('setTitle','New User');    
         $('#fm').form('clear');    
-        url = 'userAdd.do';    
+        url = 'add.do';    
     }    
     function initEditUser(){    
         var row = $('#dg').datagrid('getSelected');    
         if (row){    
             $('#dlg').dialog('open').dialog('setTitle','Edit User');    
             $('#fm').form('load',row);    
-            url = 'userMod.do'; 		
+            url = 'mod.do'; 		
         }    
     }    
-    function saveUser(){    
+    function save(){    
         $('#fm').form('submit',{    
             url: url, 
 			dataType:"json",
@@ -240,7 +254,7 @@
         if (row){    
             $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){    
                 if (r){    
-                    $.post('userDel.do',{userId:row.userId},function(result){
+                    $.post('del.do',{userId:row.id},function(result){
 						//var result = eval('('+result+')'); 
                         if (result.returnCode=='OK'){    
                             $('#dg').datagrid('reload');    // reload the user data   
@@ -291,97 +305,103 @@ function myparser(s){
         return new Date();
     }
 }
+
+
 //]]>	
 </script>
- <style type="text/css">
-        #fm{
-            margin:0;
-            padding:10px 30px;
-        }
-        .ftitle{
-            font-size:14px;
-            font-weight:bold;
-            padding:5px 0;
-            margin-bottom:10px;
-            border-bottom:1px solid #ccc;
-        }
-        .fitem{
-            margin-bottom:5px;
-        }
-        .fitem label{
-            display:inline-block;
-            width:80px;
-        }
-        .fitem input{
-            width:160px;
-        }
-    </style>
+<style type="text/css">
+#fm {
+	margin: 0;
+	padding: 10px 30px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 80px;
+}
+
+.fitem input {
+	width: 160px;
+}
+</style>
+<jsp:include page="/views/common/commonselect/commonSelect.html"></jsp:include>
 </head>
 <body onload="initData()">
 
-<div class="easyui-layout" fit="true" border="false">
-<!--由于查询需要输入条件，但是以toolbar的形式不好，所以我们在Layout框架的头部north中书写查询的相关信息-->
-<!-- 这里我们尽量使其展示的样式与toolbar的样式相似，所以我们先查找toolbar的样式，并复制过来-->
-<div data-options="region:'north',title:'高级查询'" style="height: 100px; background: #F4F4F4;">
-<form id="searchForm">
-<table>
-<tr>
-<th>用户姓名：</th>
-<td>
-<input name="queryName" /></td>
-</tr>
-<tr>
-<th>创建开始时间：</th>
-<td><input class="easyui-datebox" editable="false" name="createTime"  data-options="formatter:myformatter,parser:myparser"/></td>
-<!--由于datebox框架上面的数据必须是时间格式的，所以我们用editable="false"来禁止用户手动输入，以免报错-->
-<td><a class="easyui-linkbutton" href="javascript:void(0);" onclick="searchFunc();">查找</a></td>
-<td><a class="easyui-linkbutton" href="javascript:void(0);" onclick="clearSearch();">清空</a></td>
-</tr>
-</table>
-</form>
-</div>
-<div data-options="region:'center',title:'列表',split:false">
-<table id="dg">
-</table>
-</div>
-</div>
-</div>
+	<div class="easyui-layout" fit="true" border="false">
+		<!--由于查询需要输入条件，但是以toolbar的形式不好，所以我们在Layout框架的头部north中书写查询的相关信息-->
+		<!-- 这里我们尽量使其展示的样式与toolbar的样式相似，所以我们先查找toolbar的样式，并复制过来-->
+		<div data-options="region:'north',title:'高级查询',collapsible:false"
+			style="height: 100px; background: #F4F4F4;">
+			<form id="searchForm">
+				<table>
+					<tr>
+						<th>部门名称：</th>
+						<td><input name="queryName" /></td>
+					</tr>
+					<tr>
+						<th>创建开始时间：</th>
+						<td><input class="easyui-datebox" editable="false"
+							name="createTime"
+							data-options="formatter:myformatter,parser:myparser" /></td>
+						<!--由于datebox框架上面的数据必须是时间格式的，所以我们用editable="false"来禁止用户手动输入，以免报错-->
+						<td><a class="easyui-linkbutton" href="javascript:void(0);"
+							onclick="searchFunc();">查找</a></td>
+						<td><a class="easyui-linkbutton" href="javascript:void(0);"
+							onclick="clearSearch();">清空</a></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div data-options="region:'center',title:'列表',split:false" style="height:100%">
+			<table id="dg">
+			</table>
+		</div>
+	</div>
 
-
-	<div id="dlg" class="easyui-dialog" style="width:450px;height:400px;padding:10px 20px"
-            closed="true" buttons="#dlg-buttons" data-options="iconCls:'icon-save',resizable:true,modal:true">
-        <div class="ftitle">User Information</div>
-        <form id="fm" method="post" novalidate>
-			<input type="hidden" name="userId"/>
-            <div class="fitem">
-                <label>用户名:</label>
-                <input name="userName" class="easyui-textbox" required="true">
-            </div>
-            <div class="fitem">
-                <label>密码:</label>
-                <input name="userPass" class="easyui-textbox" required="true">
-            </div>
-		    <div class="fitem">
-                <label>部门:</label>
-                <input name="userDept" class="easyui-textbox" required="true">
-            </div>
+	<div id="dlg" class="easyui-dialog"
+		style="width:450px;height:400px;padding:10px 20px" closed="true"
+		buttons="#dlg-buttons"
+		data-options="iconCls:'icon-save',resizable:true,modal:true">
+		<div class="ftitle">User Information</div>
+		<form id="fm" method="post" novalidate>
 			<div class="fitem">
-                <label>角色:</label>
-                <input name="userRole" class="easyui-textbox" required="true">
-            </div>
-            <div class="fitem">
-                <label>电话:</label>
-                <input name="phone" class="easyui-textbox">
-            </div>
-            <div class="fitem">
-                <label>邮箱:</label>
-                <input name="email" class="easyui-textbox" validType="email">
-            </div>
-        </form>
-    </div>
-    <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Save</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
-    </div>
+				<label>部门编码:</label> <input name="deptNo" class="easyui-textbox"
+					required="true">
+			</div>
+			<div class="fitem">
+				<label>部门名称:</label> <input name="deptName" class="easyui-textbox"
+					required="true">
+			</div>
+			<div class="fitem">
+				<label>上级部门:</label> <input name="parentDept" class="easyui-textbox">
+				 <input name="pNo" type="hidden"/>
+			</div>
+			<div class="fitem">
+				<label>部门描述:</label> <input name="deptDesc" class="easyui-textbox"
+					required="true">
+			</div>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6"
+			iconCls="icon-ok" onclick="save()" style="width:90px">Save</a> 
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+			style="width:90px">Cancel</a>
+	</div>
+
 </body>
 </html>

@@ -13,7 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-
+<link rel="stylesheet" type="text/css" href="<%=path%>/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/themes/icon.css">
 <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery.easyui.min.js"></script>
 
@@ -121,14 +122,14 @@ ul,li {
 						</tr>
 						<tr>
 							<td height="34">用 户 名：</td>
-							<td><input type="text" name="j_username" id="j_username"
-								style="width:150px;" />
+							<td><input type="text" name="j_username" id="j_username" class="easyui-textbox"
+								style="width:150px;" data-options="prompt:'Username',iconCls:'icon-man',iconWidth:38"/>
 							</td>
 						</tr>
 						<tr>
 							<td height="34">密 码：</td>
-							<td><input type="password" name="j_password" id="j_password"
-								style="width:150px;" />
+							<td><input type="password" name="j_password" id="j_password" class="easyui-textbox"
+								style="width:150px;" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38"/>
 							</td>
 						</tr>
 						<tr>

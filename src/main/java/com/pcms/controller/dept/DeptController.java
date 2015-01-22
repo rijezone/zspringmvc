@@ -38,16 +38,57 @@ public class DeptController extends BaseControl{
 	public String initMain(Model model) {
 		return "/views/dept/department.jsp";
 	}
+	
+	@RequestMapping("/initSelectDept")
+	public String initSelectDept(Model model) {
+		return "/views/dept/deptSelect.jsp";
+	}
 
 	@RequestMapping(value="/getDatasInJSON",method=RequestMethod.POST)  
-	public @ResponseBody List<DeptVO> getDatasInJSON(HttpServletRequest request, HttpServletResponse response) {  
+	public @ResponseBody List<DeptVO> getDatasInJSON(HttpServletRequest request, HttpServletResponse response) {
 		String queryName = request.getParameter("queryName");
 		String createTime = request.getParameter("createTime");
-		System.out.println(queryName);
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("queryName",queryName==null?null:"%"+queryName+"%");
 		map.put("createTime", createTime);
+		map.put("pageSize", request.getParameter("rows"));
+		map.put("curPage", request.getParameter("page"));
 		List<DeptVO> list = deptService.queryObjects(map);  
 		return list;  
 	}
+	
+	@RequestMapping("/add")
+	@ResponseBody
+    public Object add(DeptVO deptVO) {
+        System.out.println(deptVO);
+        boolean flag = deptService.addObject(deptVO);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("returnCode", "OK");
+        return map;
+    }
+	@RequestMapping("/mod")
+	@ResponseBody
+    public Object mod(DeptVO deptVO) {
+        System.out.println(deptVO);
+        boolean flag = deptService.editObject(deptVO);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("returnCode", "OK");
+        return map;
+    }
+	
+	@RequestMapping("/del")
+	@ResponseBody
+    public Object del(String deptId) {
+		DeptVO deptVO = new DeptVO();
+		deptVO.setId(Integer.parseInt(deptId));
+        boolean flag = deptService.removeObject(deptVO);
+        Map<String,String> map = new HashMap<String,String>();
+        if(flag){
+        	map.put("returnCode", "OK");
+        }else{
+        	map.put("returnCode", "ERROR");
+        	map.put("errorMsg", "delete error!");
+        }     
+        return map;
+    }
 }

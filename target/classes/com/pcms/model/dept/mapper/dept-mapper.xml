@@ -21,19 +21,21 @@
         ]]>
     </select>
     <select id="queryDeptByProperty" resultMap="resultMap" parameterType="java.util.Map">  
-            select id,dept_no,dname,p_no,ddesc,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from tr_dept where 1=1 
+              select * from (
+            select rownum rn, id,dept_no,dname,p_no,ddesc,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from tr_dept where 1=1 
         <if test="queryName != null and queryName != ''">  
             AND dname like #{queryName}
         </if> 
         <if test="createTime!=null and createTime!=''">
             and createtime >= to_date(#{createTime},'yyyy-MM-dd')
         </if>
+           <![CDATA[  )a where a.rn>(#{curPage}-1)*#{pageSize} and a.rn<=#{curPage}*#{pageSize} ]]>
     </select>
 
     <!-- 自动生成id策略 -->
     <insert id="addDept" parameterType="dept">
-        insert into t_user(userId,userName, userPass, userDept,userRole,email,phone,createtime)
-        values(t_user_seq.nextval,#{userName}, #{userPass}, #{userDept}, #{userRole}, #{email}, #{phone},sysdate)
+        insert into tr_dept(dept_no,dname,p_no,ddesc,createtime,updatetime)
+        values(#{deptNo}, #{deptName}, #{pNo}, #{deptDesc},sysdate,sysdate)
     </insert>
 
     <!-- 根据selectKey语句生成主键 -->
@@ -46,19 +48,17 @@
     </insert>
  -->
     <update id="editDept" parameterType="dept">
-        update t_user set
-        userName = #{userName},
-        userPass = #{userPass},
-        userDept = #{userDept},
-        userRole = #{userRole},
-        email = #{email},
-        phone = #{phone},
+        update tr_dept set
+        dname = #{deptName},
+        dept_no = #{deptNo},
+        p_no = #{pNo},
+        ddesc = #{deptDesc},
         updatetime=sysdate
-        where userId = #{userId}
+        where id = #{id}
     </update>
 
     <delete id="removeDept" parameterType="dept">
-        delete from t_user where userId = #{userId}
+        delete from tr_dept where id = #{id}
     </delete>
 </mapper>
 

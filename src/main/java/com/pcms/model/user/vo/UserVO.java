@@ -7,12 +7,14 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
+import com.pcms.common.base.model.vo.BaseVO;
+
 /**
  * @author zhuming
  *
  */
 @Entity
-public class UserVO implements Serializable{
+public class UserVO extends BaseVO implements Serializable{
 
 	/**
 	 * 
@@ -26,18 +28,7 @@ public class UserVO implements Serializable{
 	private String userRole;
 	private String email;
 	private String phone;
-	private String createTime;
-	private String updateTime;
 	
-	@Override
-
-	public String toString() {
-
-		return this.userId + "#" + this.userName + "#" + this.userPass +  "#" + 
-
-            this.userDept +  "#" + this.userRole +  "#" + this.email + "#" + this.phone;
-
-	}
 	public Integer getUserId() {
 		return userId;
 	}
@@ -80,18 +71,4 @@ public class UserVO implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-	public String getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-
 }

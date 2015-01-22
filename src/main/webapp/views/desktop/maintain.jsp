@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var tt = $('#tt');
 		if (tt.tabs('exists', title)){//如果tab已经存在,则选中并刷新该tab    	
        		tt.tabs('select', title);
-       	 	refreshTab({tabTitle:title,url:href});
+       	 	refreshTab({tabTitle:title,url:'<%=path%>/'+href});
 	} else {
     	if (href){
 	    	var content = '<iframe scrolling="no" frameborder="0"  src="<%=path%>/'+href+'" style="width:100%;height:100%;"></iframe>';
@@ -100,7 +100,7 @@ function refreshTab(cfg){
 				data-options="selected:true">
 				<a href="javascript:void(0);" onclick="addTab('用户管理','userController/initMain.do','a')">用户管理</a>
 				<br>
-				<a href="javascript:void(0);" onclick="addTab('用户管理','deptController/initMain.do','a')">部门管理</a>
+				<a href="javascript:void(0);" onclick="addTab('部门管理','deptController/initMain.do','a')">部门管理</a>
 			</div>
 			<div title="Title2" style="padding:10px;">content2</div>
 			<div title="Title3" style="padding:10px">content3</div>

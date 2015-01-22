@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,13 +38,15 @@ public class UserController extends BaseControl{
     }
 	
 	@RequestMapping(value="/getUsersInJSON",method=RequestMethod.POST)  
-    public @ResponseBody List<UserVO> getUsersInJSON(HttpServletRequest request, HttpServletResponse response) {  
+    public @ResponseBody List<UserVO> getUsersInJSON(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println(page+"  "+rows);
 		String queryName = request.getParameter("queryName");
 		String createTime = request.getParameter("createTime");
-		System.out.println(queryName);
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("queryName",queryName==null?null:"%"+queryName+"%");
 		map.put("createTime", createTime);
+		map.put("pageSize", request.getParameter("rows"));
+		map.put("curPage", request.getParameter("page"));
         List<UserVO> list = userService.queryUsers(map);  
         return list;  
     } 
@@ -53,7 +54,6 @@ public class UserController extends BaseControl{
 	@RequestMapping("/userAdd")
 	@ResponseBody
     public Object userAdd(UserVO userVO) {
-        System.out.println(userVO);
         boolean flag = userService.addUser(userVO);
         Map<String,String> map = new HashMap<String,String>();
         map.put("returnCode", "OK");
@@ -86,15 +86,7 @@ public class UserController extends BaseControl{
         }else{
         	map.put("returnCode", "ERROR");
         	map.put("errorMsg", "delete error!");
-        }
-        
+        }   
         return map;
-    }
-  
-    @ExceptionHandler(Exception.class)
-    public String exception(Exception e, HttpServletRequest request) {
-        //e.printStackTrace();
-        request.setAttribute("exception", e);
-        return "/error.jsp";
     }
 }

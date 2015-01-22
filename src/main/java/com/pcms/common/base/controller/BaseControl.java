@@ -4,16 +4,30 @@
  */
 package com.pcms.common.base.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 /**
  * @description 控制类基类
  * @author zhuming
  * @version 2015 3:19:46 PM
  */
-public class BaseControl {
+public abstract class BaseControl {
 	protected String page;
 	protected String rows;
 	protected String sort;
 	protected String order;
+	
+	public abstract String initMain(Model model);
+	
+    @ExceptionHandler(Exception.class)
+    public String exception(Exception e, HttpServletRequest request) {
+        //e.printStackTrace();
+        request.setAttribute("exception", e);
+        return "/error.jsp";
+    }
 	public String getPage() {
 		return page;
 	}

@@ -5,32 +5,24 @@ package com.pcms.model.dept.vo;
 
 import java.io.Serializable;
 
+import com.pcms.common.base.model.vo.BaseVO;
+
 /**
  * @author zhuming
  *
  */
-public class DeptVO implements Serializable{
+public class DeptVO extends BaseVO implements Serializable{
 /**
 	 * serialVersionUID long
 	 */
 	private static final long serialVersionUID = 1L;
-	/*
- *   id      INTEGER not null,
-  dept_no VARCHAR2(10 CHAR),
-  dname   VARCHAR2(30 CHAR),
-  p_no    INTEGER,
-  ddesc   VARCHAR2(60 CHAR),
-  col1    VARCHAR2(100 CHAR),
-  col2    VARCHAR2(100 CHAR),
-  col3    VARCHAR2(100 CHAR)
- */
+	
 	private Integer id;
 	private String deptNo;
 	private String deptName;
-	private Integer pNo;
+	private String pNo;
+	private String parentName;
 	private String deptDesc;
-	private String createTime;
-	private String updateTime;
 	
 	public Integer getId() {
 		return id;
@@ -50,28 +42,22 @@ public class DeptVO implements Serializable{
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
-	public Integer getpNo() {
-		return pNo;
-	}
-	public void setpNo(Integer pNo) {
-		this.pNo = pNo;
-	}
 	public String getDeptDesc() {
 		return deptDesc;
 	}
 	public void setDeptDesc(String deptDesc) {
 		this.deptDesc = deptDesc;
 	}
-	public String getCreateTime() {
-		return createTime;
+	public String getParentName() {
+		return parentName;
 	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
-	public String getUpdateTime() {
-		return updateTime;
+	public void setpNo(String pNo) {
+		this.pNo = pNo;
 	}
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
+	public String getpNo() {
+		return pNo;
 	}
 }
