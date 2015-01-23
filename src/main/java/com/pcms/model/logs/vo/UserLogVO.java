@@ -11,7 +11,6 @@ import javax.persistence.Entity;
  * @Description: 用户登录日志
  * @author by mizh
  * @date 2015-1-20 下午6:04:32
- *
  */
 @Entity
 public class UserLogVO implements Serializable{
