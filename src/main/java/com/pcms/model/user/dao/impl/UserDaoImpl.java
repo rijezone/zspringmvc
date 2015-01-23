@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.pcms.model.user.dao.UserDao;
-import com.pcms.model.user.mapper.UserMapper;
+import com.pcms.model.user.dao.mapper.UserMapper;
 import com.pcms.model.user.vo.UserVO;
 
 

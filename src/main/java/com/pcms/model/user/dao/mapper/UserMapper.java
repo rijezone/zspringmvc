@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pcms.model.user.mapper;
+package com.pcms.model.user.dao.mapper;
 
 import java.util.List;
 import java.util.Map;

@@ -36,6 +36,7 @@ public class DeptController extends BaseControl{
 
 	@RequestMapping("/initMain")
 	public String initMain(Model model) {
+		
 		return "/views/dept/department.jsp";
 	}
 	
@@ -45,7 +46,8 @@ public class DeptController extends BaseControl{
 	}
 
 	@RequestMapping(value="/getDatasInJSON",method=RequestMethod.POST)  
-	public @ResponseBody List<DeptVO> getDatasInJSON(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public  List<DeptVO> getDatasInJSON(HttpServletRequest request, HttpServletResponse response) {
 		String queryName = request.getParameter("queryName");
 		String createTime = request.getParameter("createTime");
 		Map<String,String> map = new HashMap<String,String>();
@@ -54,7 +56,7 @@ public class DeptController extends BaseControl{
 		map.put("pageSize", request.getParameter("rows"));
 		map.put("curPage", request.getParameter("page"));
 		List<DeptVO> list = deptService.queryObjects(map);  
-		return list;  
+		return list; 
 	}
 	
 	@RequestMapping("/add")

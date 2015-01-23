@@ -9,7 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.pcms.model.dept.dao.DeptDao;
-import com.pcms.model.dept.mapper.DeptMapper;
+import com.pcms.model.dept.dao.mapper.DeptMapper;
 import com.pcms.model.dept.vo.DeptVO;
 
 

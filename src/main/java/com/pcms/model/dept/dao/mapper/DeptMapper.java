@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pcms.model.dept.mapper;
+package com.pcms.model.dept.dao.mapper;
 
 import java.util.List;
 import java.util.Map;

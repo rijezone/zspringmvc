@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.pcms.model.logs.mapper.UserLogMapper">
+<!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
+   <resultMap type="com.pcms.model.logs.vo.UserLogVO" id="userLogResultMap">
+        <result property="id" column="id"/>
+        <result property="userBH" column="user_bh"/>
+        <result property="logHost" column="log_host"/>
+        <result property="userName" column="user_name"/>
+        <result property="logOn" column="log_on"/>
+        <result property="logOut" column="log_out"/>
+        <result property="logLvl" column="log_lvl"/>
+        <result property="logEnt" column="log_ent"/>
+    </resultMap>
+
+    <select id="getAllUserLogs" resultMap="userLogResultMap">
+        <![CDATA[
+            select * from tr_user_log
+        ]]>
+    </select>
+  
+    <!-- 自动生成id策略 -->
+    <insert id="addUserLogs" parameterType="userLog">
+        insert into tr_user_log(user_bh,log_host, user_name, log_on, log_out, log_lvl, log_ent)
+        values(#{userBH}, #{logHost}, #{userName}, sysdate, #{logOut, jdbcType=DATE}, #{logLvl}, #{logEnt, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 根据selectKey语句生成主键 -->
+    <!-- <insert id="addAccount4Key" parameterType="user">
+        <selectKey keyProperty="user_id" order="BEFORE" resultType="int">
+            select cast(random() * 10000 as Integer) a from #Tab
+        </selectKey>
+        insert into user(user_id, status, username, password)
+        values(#{userId}, #{status}, #{username}, #{password})
+    </insert>
+ -->
+   
+    <delete id="deleteUserLogs" parameterType="userLog">
+        delete from tr_user_log where id = #{id}
+    </delete>
+</mapper>
+
+
