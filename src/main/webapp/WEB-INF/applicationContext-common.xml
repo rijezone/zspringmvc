@@ -55,7 +55,7 @@
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 
-		<property name="basePackage" value="com.pcms.model" />
+		<property name="basePackage" value="com.pcms.model,com.pcms.role.mapper" />
 
 		<property name="markerInterface" value="com.pcms.model.SqlMapper" />
 

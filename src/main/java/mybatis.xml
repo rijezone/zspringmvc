@@ -9,6 +9,7 @@
     <mappers>
     	<mapper resource="com/pcms/model/user/mapper/user-mapper.xml"/>
     	<mapper resource="com/pcms/model/dept/mapper/dept-mapper.xml"/>
+    	<mapper resource="com/pcms/role/mapper/RoleMapper.xml"/>
     </mappers>
 </configuration>
 
