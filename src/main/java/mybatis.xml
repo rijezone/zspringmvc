@@ -5,11 +5,13 @@
     <typeAliases>
         <typeAlias type="com.pcms.model.user.vo.UserVO" alias="user"/>
         <typeAlias type="com.pcms.model.dept.vo.DeptVO" alias="dept"/>
+        <typeAlias type="com.pcms.model.logs.vo.UserLogVO" alias="userLog"/>
     </typeAliases>
     <mappers>
     	<mapper resource="com/pcms/model/user/mapper/user-mapper.xml"/>
     	<mapper resource="com/pcms/model/dept/mapper/dept-mapper.xml"/>
     	<mapper resource="com/pcms/role/mapper/RoleMapper.xml"/>
+    	<mapper resource="com/pcms/model/logs/dao/mapper/userLog-mapper.xml"/>
     </mappers>
 </configuration>
 
