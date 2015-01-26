@@ -11,9 +11,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.pcms.model.logs.dao.UserLogDao;
-import com.pcms.model.logs.mapper.UserLogMapper;
+import com.pcms.model.logs.dao.mapper.UserLogMapper;
 import com.pcms.model.logs.vo.UserLogVO;
-import com.pcms.model.user.vo.UserVO;
 
 /**
  * @Description: TODO
