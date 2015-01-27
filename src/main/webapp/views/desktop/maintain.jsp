@@ -85,11 +85,13 @@ function refreshTab(cfg){
 </script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',title:'top',split:true,collapsible:false,href:''"
+	<div data-options="region:'north',title:'',split:true,collapsible:false,href:''"
 		style="height:150px;">
-		<div id="cc"></div>
+		<div id="cc" class="new-top-bg"></div>
+		<!-- 
 		<h2>Complex Layout</h2>
 		<p>This sample shows how to create a complex layout.</p>
+		 -->
 		<div style="margin:20px 0;"></div>
 	</div>
 	
@@ -103,6 +105,8 @@ function refreshTab(cfg){
 				<a href="javascript:void(0);" onclick="addTab('部门管理','deptController/initMain.do','a')">部门管理</a>
 				<br>
 				<a href="javascript:void(0);" onclick="addTab('角色管理','roleController/initMain.do','a')">角色管理</a>
+				<br>
+				<a href="javascript:void(0);" onclick="addTab('日志管理','userLogController/initMain.do','a')">日志管理</a>
 			</div>
 			<div title="Title2" style="padding:10px;">content2</div>
 			<div title="Title3" style="padding:10px">content3</div>
