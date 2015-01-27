@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
-<mapper namespace="com.pcms.model.user.mapper.UserMapper">
+<mapper namespace="com.pcms.model.user.dao.mapper.UserMapper">
 <!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
    <resultMap type="com.pcms.model.user.vo.UserVO" id="userResultMap">
         <result property="userId" column="userid"/>
