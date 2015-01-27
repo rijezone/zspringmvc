@@ -29,22 +29,18 @@ public class UserLogController extends BaseControl {
 	@Inject
 	private UserLogService userLogService;
 	
+	@RequestMapping("/initMain")
+	public String initMain(Model model) {
+		return "/views/logs/userLogList.jsp";
+	}
+	
 	@RequestMapping("/userLogAdd")
 	@ResponseBody
     public Object userLogAdd(UserLogVO userLogVO) {
-		
         userLogService.addUserLogs(userLogVO);
         Map<String,String> map = new HashMap<String,String>();
         map.put("returnCode", "OK");
         return map;
     }
 
-	/* (non-Javadoc)
-	 * @see com.pcms.common.base.controller.BaseControl#initMain(org.springframework.ui.Model)
-	 */
-	@Override
-	public String initMain(Model model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
