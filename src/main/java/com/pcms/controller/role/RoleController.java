@@ -21,7 +21,7 @@ import com.pcms.model.role.vo.Role;
 import com.pcms.model.user.vo.UserVO;
 
 /**
- * @author baotq upd
+ * @author baotq upd2
  * 
  */
 @Controller
