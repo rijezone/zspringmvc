@@ -10,7 +10,7 @@
     <mappers>
     	<mapper resource="com/pcms/model/user/dao/mapper/user-mapper.xml"/>
     	<mapper resource="com/pcms/model/dept/dao/mapper/dept-mapper.xml"/>
-    	<mapper resource="com/pcms/role/mapper/RoleMapper.xml"/>
+    	<mapper resource="com/pcms/model/role/dao/impl/mapper/RoleMapper.xml"/>
     	<mapper resource="com/pcms/model/logs/dao/mapper/userLog-mapper.xml"/>
     </mappers>
 </configuration>

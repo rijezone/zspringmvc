@@ -1,17 +1,16 @@
-package com.pcms.role.mapper;
+package com.pcms.model.role.dao;
 
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.pcms.model.SqlMapper;
-import com.pcms.role.model.Role;
+import com.pcms.model.role.vo.Role;
 
 /**
  * @author baotq
  * 
  */
-public interface RoleMapper extends SqlMapper {
+public interface RoleDao {
 
 	/**
 	 * 根据主键查找角色
@@ -47,9 +46,10 @@ public interface RoleMapper extends SqlMapper {
 	 * @throws DataAccessException
 	 */
 	boolean delete(Role role) throws DataAccessException;
-	
+
 	/**
 	 * 修改角色
+	 * 
 	 * @param role
 	 * @return
 	 * @throws DataAccessException

@@ -1,4 +1,4 @@
-package com.pcms.role.model;
+package com.pcms.model.role.vo;
 
 import java.io.Serializable;
 

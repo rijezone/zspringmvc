@@ -1,4 +1,4 @@
-package com.pcms.role.controller;
+package com.pcms.controller.role;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcms.common.base.controller.BaseControl;
+import com.pcms.model.role.service.RoleService;
+import com.pcms.model.role.vo.Role;
 import com.pcms.model.user.vo.UserVO;
-import com.pcms.role.model.Role;
-import com.pcms.role.service.RoleService;
 
 /**
  * @author baotq

@@ -1,25 +1,30 @@
-package com.pcms.role.service.impl;
+package com.pcms.model.role.dao.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import com.pcms.role.mapper.RoleMapper;
-import com.pcms.role.model.Role;
-import com.pcms.role.service.RoleService;
+import com.pcms.model.role.dao.RoleDao;
+import com.pcms.model.role.dao.impl.mapper.RoleMapper;
+import com.pcms.model.role.vo.Role;
 
-@Service("roleService")
-public class RoleServiceImpl implements RoleService {
+@Repository
+public class RoleDaoImpl implements RoleDao {
 
-	@Resource
+	@Inject
 	private RoleMapper roleMapper;
 
 	@Override
 	public Role findById(String id) throws DataAccessException {
 		return roleMapper.findById(id);
+	}
+
+	@Override
+	public List<Role> query(Role role) throws DataAccessException {
+		return roleMapper.query(role);
 	}
 
 	@Override
@@ -30,11 +35,6 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public boolean delete(Role role) throws DataAccessException {
 		return roleMapper.delete(role);
-	}
-
-	@Override
-	public List<Role> query(Role role) throws DataAccessException {
-		return roleMapper.query(role);
 	}
 
 	@Override

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.pcms.model.role.dao.impl.mapper.RoleMapper">
+	<!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
+	<resultMap type="com.pcms.model.role.vo.Role" id="roleResult">
+		<result property="id" column="ID" />
+		<result property="code" column="ROLE_BH" />
+		<result property="name" column="ROLE_NAME" />
+		<result property="type" column="ROLE_TYPE" />
+		<result property="desc" column="RDESC" />
+	</resultMap>
+
+	<!-- 根据主键查找记录 -->
+	<select id="findById" parameterType="string" resultMap="roleResult">
+        <![CDATA[
+            select * from TR_ROLE  where id = #{id}
+        ]]>
+	</select>
+
+	<!-- 根据条件查找角色 -->
+	<select id="query"  parameterType="com.pcms.model.role.vo.Role" resultMap="roleResult">
+		select ID,ROLE_BH,ROLE_NAME,ROLE_TYPE,RDESC
+		from TR_ROLE where 1=1
+		<if test="name != null and name != ''">
+			AND ROLE_NAME like '%'||#{name}||'%'
+		</if>
+	</select>
+    
+	<!-- 新增角色 -->
+	<insert id="add" parameterType="com.pcms.model.role.vo.Role">
+    	<![CDATA[
+	        insert into TR_ROLE(ID,ROLE_BH, ROLE_NAME, ROLE_TYPE,RDESC)
+	        values(#{id},#{code}, #{name}, #{type}, #{desc})
+    	]]>
+	</insert>
+
+	<!-- 删除角色 -->
+	<delete id="delete" parameterType="com.pcms.model.role.vo.Role">
+    	<![CDATA[
+        	delete from TR_ROLE where id = #{id}
+         ]]>
+	</delete>
+
+	<update id="update" parameterType="com.pcms.model.role.vo.Role">
+		UPDATE TR_ROLE
+		SET
+			ROLE_BH = #{code},
+			ROLE_NAME = #{name},
+			RDESC = #{desc}
+		WHERE id = #{id}
+	</update>
+    
+</mapper>
+
+
