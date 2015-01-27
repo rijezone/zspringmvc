@@ -87,11 +87,9 @@ function refreshTab(cfg){
 <body class="easyui-layout">
 	<div data-options="region:'north',title:'',split:true,collapsible:false,href:''"
 		style="height:150px;">
-		<div id="cc" class="new-top-bg"></div>
-		<!-- 
+		<div id="cc"></div>
 		<h2>Complex Layout</h2>
 		<p>This sample shows how to create a complex layout.</p>
-		 -->
 		<div style="margin:20px 0;"></div>
 	</div>
 	
