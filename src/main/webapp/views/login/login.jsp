@@ -135,7 +135,7 @@ ul,li {
 						<tr>
 							<td height="32">&nbsp;</td>
 							<td align="right"><input type="submit" class="JUI_ButtonCls"
-								value="&nbsp;&nbsp;&nbsp;登&nbsp;&nbsp;录&nbsp;&nbsp;&nbsp;">
+								value="&nbsp;&nbsp;登&nbsp;&nbsp;录&nbsp;&nbsp;">
 							</td>
 						</tr>
 						<tr>
