@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.pcms.model.func.dao.mapper.FuncMapper">
+	
+	<!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
+   <resultMap type="com.pcms.model.func.vo.FuncVO" id="resultMap">
+        <result property="id" column="ID"/>
+        <result property="funcBh" column="FUNC_BH"/>
+        <result property="funcName" column="FUNC_NAME"/>
+        <result property="parentBh" column="PARENT_BH"/>
+        <result property="fdesc" column="FDESC"/>
+    </resultMap>
+
+    <select id="getAllFuncs" resultMap="resultMap">
+        <![CDATA[
+            select * from TR_FUNC
+        ]]>
+    </select>
+    <select id="queryFuncByProperty" resultMap="resultMap" parameterType="java.util.Map">  
+              select * from (
+            select rownum rn, ID, FUNC_BH, FUNC_NAME, PARENT_BH, FDESC from TR_FUNC where 1=1 
+        <if test="queryName != null and queryName != ''">  
+            AND FUNC_NAME like #{queryName}
+        </if> 
+           <![CDATA[  )a where a.rn>(#{curPage}-1)*#{pageSize} and a.rn<=#{curPage}*#{pageSize} ]]>
+    </select>
+
+    <!-- 自动生成id策略 -->
+    <insert id="addFunc" parameterType="func">		
+		insert into TR_FUNC (FUNC_BH, FUNC_NAME,PARENT_BH, FDESC)
+	    values (#{funcBh,jdbcType=VARCHAR}, #{funcName,jdbcType=VARCHAR}, 
+	      #{parentBh,jdbcType=VARCHAR}, #{fdesc,jdbcType=VARCHAR})   		
+   
+    </insert>
+
+    <update id="editFunc" parameterType="func">
+        update TR_FUNC
+	    set FUNC_BH = #{funcBh,jdbcType=VARCHAR},
+	      FUNC_NAME = #{funcName,jdbcType=VARCHAR},
+	      PARENT_BH = #{parentBh,jdbcType=VARCHAR},
+	      FDESC = #{fdesc,jdbcType=VARCHAR}
+	    where ID = #{id}
+    </update>
+
+    <delete id="removeFunc" parameterType="func">
+        delete from TR_FUNC
+    	where ID = #{id,jdbcType=DECIMAL}
+    </delete>
+</mapper>
+
+

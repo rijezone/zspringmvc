@@ -105,6 +105,8 @@ function refreshTab(cfg){
 				<a href="javascript:void(0);" onclick="addTab('角色管理','roleController/initMain.do','a')">角色管理</a>
 				<br>
 				<a href="javascript:void(0);" onclick="addTab('日志管理','userLogController/initMain.do','a')">日志管理</a>
+				<br>
+				<a href="javascript:void(0);" onclick="addTab('功能管理','funcController/initMain.do','a')">功能管理</a>
 			</div>
 			<div title="Title2" style="padding:10px;">content2</div>
 			<div title="Title3" style="padding:10px">content3</div>
