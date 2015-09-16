@@ -37,14 +37,6 @@
 		</security:session-management>
 	</security:http>
 	
-	<!-- 指定一个自定义的authentication-manager :customUserDetailsService -->
-	<security:authentication-manager>
-		<security:authentication-provider
-			user-service-ref="customUserDetailsService">
-			<!-- <security:password-encoder ref="passwordEncoder" /> -->
-		</security:authentication-provider>
-	</security:authentication-manager>
-
 	<!-- 对密码进行MD5编码 -->
 	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 
@@ -52,6 +44,14 @@
 	<bean id="customUserDetailsService" class="com.pcms.common.CustomUserDetailsService">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
+	
+	<!-- 指定一个自定义的authentication-manager :customUserDetailsService -->
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="customUserDetailsService">
+			<!-- <security:password-encoder ref="passwordEncoder" /> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
 </beans>

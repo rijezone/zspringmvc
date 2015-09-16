@@ -4,16 +4,16 @@
     <!-- 别名 -->
     <typeAliases>
         <typeAlias type="com.pcms.model.user.vo.UserVO" alias="user"/>
-        <typeAlias type="com.pcms.model.dept.vo.DeptVO" alias="dept"/>
-        <typeAlias type="com.pcms.model.logs.vo.UserLogVO" alias="userLog"/>
-        <typeAlias type="com.pcms.model.func.vo.FuncVO" alias="func"/>
+       	<typeAlias type="com.pcms.model.dept.vo.DeptVO" alias="dept"/>
+      <!--  <typeAlias type="com.pcms.model.logs.vo.UserLogVO" alias="userLog"/>
+        <typeAlias type="com.pcms.model.func.vo.FuncVO" alias="func"/> -->  
     </typeAliases>
     <mappers>
     	<mapper resource="com/pcms/model/user/dao/mapper/user-mapper.xml"/>
-    	<mapper resource="com/pcms/model/dept/dao/mapper/dept-mapper.xml"/>
-    	<mapper resource="com/pcms/model/role/dao/impl/mapper/RoleMapper.xml"/>
+     	<mapper resource="com/pcms/model/dept/dao/mapper/dept-mapper.xml"/>
+    <!--	<mapper resource="com/pcms/model/role/dao/impl/mapper/RoleMapper.xml"/>
     	<mapper resource="com/pcms/model/logs/dao/mapper/userLog-mapper.xml"/>
-    	<mapper resource="com/pcms/model/func/dao/mapper/func-mapper.xml"/>
+    	<mapper resource="com/pcms/model/func/dao/mapper/func-mapper.xml"/> -->	
     </mappers>
 </configuration>
 

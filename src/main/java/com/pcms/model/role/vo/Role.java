@@ -12,53 +12,53 @@ import javax.persistence.Entity;
 public class Role implements Serializable {
 	private static final long serialVersionUID = -8890143292870239662L;
 
-	private Long id; // 主键
+	private Long roleId; // 主键
 
-	private String code; // 角色编号
+	private String roleCode; // 角色编号
 
-	private String name; // 角色名称
+	private String roleName; // 角色名称
 
-	private String type; // 角色类型
+	private String roleType; // 角色类型
 
-	private String desc; // 角色描述
+	private String roleDesc; // 角色描述
 
-	public Long getId() {
-		return id;
+	public Long getRoleId() {
+		return roleId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 
-	public String getCode() {
-		return code;
+	public String getRoleCode() {
+		return roleCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
 	}
 
-	public String getName() {
-		return name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public String getType() {
-		return type;
+	public String getRoleType() {
+		return roleType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setRoleType(String roleType) {
+		this.roleType = roleType;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getRoleDesc() {
+		return roleDesc;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setRoleDesc(String roleDesc) {
+		this.roleDesc = roleDesc;
 	}
 }

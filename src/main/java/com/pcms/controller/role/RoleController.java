@@ -43,7 +43,7 @@ public class RoleController extends BaseControl {
 		String name = request.getParameter("queryName");
 		// String createTime = request.getParameter("createTime");
 		Role role = new Role();
-		role.setName(name);
+		//role.setName(name);
 		List<Role> list = roleService.query(role);
 		return list;
 	}
@@ -52,8 +52,8 @@ public class RoleController extends BaseControl {
 	@ResponseBody
 	public Object addRole(Role role) {
 		// ID会在数据库自动生成，这里设置一个伪值。
-		role.setId(1L);
-		role.setType("1");
+		//role.setId(1L);
+		//role.setType("1");
 		roleService.add(role);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("returnCode", "OK");
@@ -82,7 +82,7 @@ public class RoleController extends BaseControl {
 	@ResponseBody
 	public Object delRole(String id) {
 		Role role = new Role();
-		role.setId(Long.parseLong(id));
+		//role.setId(Long.parseLong(id));
 		boolean flag = roleService.delete(role);
 		Map<String, String> map = new HashMap<String, String>();
 		if (flag) {
