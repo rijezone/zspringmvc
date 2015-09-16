@@ -3,26 +3,27 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
-<mapper namespace="com.pcms.model.dept.mapper.DeptMapper">
+<mapper namespace="com.pcms.model.dept.dao.mapper.DeptMapper">
 <!--id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->
    <resultMap type="com.pcms.model.dept.vo.DeptVO" id="resultMap">
-        <result property="id" column="id"/>
-        <result property="deptNo" column="dept_no"/>
-        <result property="deptName" column="dname"/>
-        <result property="pNo" column="p_no"/>
-        <result property="deptDesc" column="ddesc"/>
+        <result property="deptId" column="deptid"/>
+        <result property="deptCode" column="deptcode"/>
+        <result property="deptName" column="deptname"/>
+        <result property="parentCode" column="parentcode"/>
+        <result property="deptDesc" column="deptdesc"/>
         <result property="createTime" column="createtime"/>
         <result property="updateTime" column="updatetime"/>
     </resultMap>
 
     <select id="getAllDepts" resultMap="resultMap">
         <![CDATA[
-            select * from tr_dept
+            select * from t_dept
         ]]>
     </select>
+    <!--  Oracle写法
     <select id="queryDeptByProperty" resultMap="resultMap" parameterType="java.util.Map">  
               select * from (
-            select rownum rn, id,dept_no,dname,p_no,ddesc,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from tr_dept where 1=1 
+            select rownum rn, id,dept_no,dname,p_no,ddesc,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_dept where 1=1 
         <if test="queryName != null and queryName != ''">  
             AND dname like #{queryName}
         </if> 
@@ -31,11 +32,28 @@
         </if>
            <![CDATA[  )a where a.rn>(#{curPage}-1)*#{pageSize} and a.rn<=#{curPage}*#{pageSize} ]]>
     </select>
-
+ -->
+  <!-- Mysql写法 -->
+     <select id="queryDeptByProperty" resultMap="resultMap" parameterType="java.util.Map"> 
+     	select * from (
+            select deptid,deptname,deptcode,deptdesc
+            		,parentcode
+            		,(select t.deptname from t_dept t where t.deptcode=d.parentcode)parentdeptname
+            		,date_format(createtime,'%Y-%m-%d %T')createtime
+            		,date_format(updatetime,'%Y-%m-%d %T')updatetime 
+            from t_dept d where 1=1 
+       		 <if test="queryName != null and queryName != ''">  
+           		 AND deptname like #{queryName}
+       		 </if> 
+        	<if test="createTime!=null and createTime!=''">
+            	and createtime >= to_date(#{createTime},'yyyy-MM-dd')
+        	</if>
+       	<![CDATA[  )a limit #{rowsBegin},#{pageSize}]]>
+    </select>
     <!-- 自动生成id策略 -->
     <insert id="addDept" parameterType="dept">
-        insert into tr_dept(dept_no,dname,p_no,ddesc,createtime,updatetime)
-        values(#{deptNo}, #{deptName}, #{pNo}, #{deptDesc},sysdate,sysdate)
+        insert into t_dept(deptcode,deptname,parentcode,deptdesc,createtime,updatetime)
+        values(#{deptCode},#{deptName}, #{parentCode}, #{deptDesc},sysdate(),sysdate())
     </insert>
 
     <!-- 根据selectKey语句生成主键 -->
@@ -48,17 +66,17 @@
     </insert>
  -->
     <update id="editDept" parameterType="dept">
-        update tr_dept set
-        dname = #{deptName},
-        dept_no = #{deptNo},
-        p_no = #{pNo},
-        ddesc = #{deptDesc},
-        updatetime=sysdate
-        where id = #{id}
+        update t_dept set
+        deptname = #{deptName},
+        deptcode = #{deptCode},
+        parentcode = #{parentCode},
+        deptdesc = #{deptDesc},
+        updatetime=sysdate()
+        where deptid = #{deptId}
     </update>
 
     <delete id="removeDept" parameterType="dept">
-        delete from tr_dept where id = #{id}
+        delete from t_dept where deptid = #{deptId}
     </delete>
 </mapper>
 

@@ -22,6 +22,7 @@
             select * from t_user
         ]]>
     </select>
+    <!--   Oracle写法
     <select id="queryUsers" resultMap="userResultMap" parameterType="java.util.Map"> 
     select * from (
             select rownum rn,userid,username,userpass,userdept,userrole,email,phone,to_char(createtime,'yyyy-mm-dd hh24:mi:ss')createtime,to_char(updatetime,'yyyy-mm-dd hh24:mi:ss')updatetime from t_user where 1=1 
@@ -33,7 +34,19 @@
         </if>
       <![CDATA[  )a where a.rn>(#{curPage}-1)*#{pageSize} and a.rn<=#{curPage}*#{pageSize} ]]>
     </select>
-
+ -->
+ <!-- Mysql写法 -->
+     <select id="queryUsers" resultMap="userResultMap" parameterType="java.util.Map"> 
+     	select * from (
+            select userid,username,userpass,userdept,userrole,email,phone,date_format(createtime,'%Y-%m-%d %T')createtime,date_format(updatetime,'%Y-%m-%d %T')updatetime from t_user where 1=1 
+       		 <if test="queryName != null and queryName != ''">  
+           		 AND USERNAME like #{queryName}
+       		 </if> 
+        	<if test="createTime!=null and createTime!=''">
+            	and createtime >= to_date(#{createTime},'yyyy-MM-dd')
+        	</if>
+       	<![CDATA[  )a limit #{rowsBegin},#{pageSize}]]>
+    </select>
     <!-- userResultMap是user-resultmap.xml中定义的resultmap -->
     <select id="getUserById" parameterType="string" resultMap="userResultMap">
         <![CDATA[
@@ -50,8 +63,8 @@
 
     <!-- 自动生成id策略 -->
     <insert id="addUser" parameterType="user">
-        insert into t_user(userId,userName, userPass, userDept,userRole,email,phone,createtime,updatetime)
-        values(t_user_seq.nextval,#{userName}, #{userPass}, #{userDept}, #{userRole}, #{email}, #{phone},sysdate,sysdate)
+        insert into t_user(userName, userPass, userDept,userRole,email,phone,createtime,updatetime)
+        values(#{userName}, #{userPass}, #{userDept}, #{userRole}, #{email}, #{phone},sysdate(),sysdate())
     </insert>
 
     <!-- 根据selectKey语句生成主键 -->
@@ -71,7 +84,7 @@
         userRole = #{userRole},
         email = #{email},
         phone = #{phone},
-        updatetime=sysdate
+        updatetime=sysdate()
         where userId = #{userId}
     </update>
 

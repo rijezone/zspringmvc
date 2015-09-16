@@ -17,24 +17,20 @@ public class DeptVO extends BaseVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
-	private String deptNo;
+	private Integer deptId;
+	private String deptCode;
 	private String deptName;
-	private String pNo;
-	private String parentName;
+	private String parentCode;
+	private String parentDeptName;
 	private String deptDesc;
+	private String createTime;
+	private String updateTime;
 	
-	public Integer getId() {
-		return id;
+	public Integer getDeptId() {
+		return deptId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getDeptNo() {
-		return deptNo;
-	}
-	public void setDeptNo(String deptNo) {
-		this.deptNo = deptNo;
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
 	}
 	public String getDeptName() {
 		return deptName;
@@ -48,16 +44,34 @@ public class DeptVO extends BaseVO implements Serializable{
 	public void setDeptDesc(String deptDesc) {
 		this.deptDesc = deptDesc;
 	}
-	public String getParentName() {
-		return parentName;
+	public String getDeptCode() {
+		return deptCode;
 	}
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
 	}
-	public void setpNo(String pNo) {
-		this.pNo = pNo;
+	public String getParentCode() {
+		return parentCode;
 	}
-	public String getpNo() {
-		return pNo;
+	public void setParentCode(String parentCode) {
+		this.parentCode = parentCode;
+	}
+	public String getParentDeptName() {
+		return parentDeptName;
+	}
+	public void setParentDeptName(String parentDeptName) {
+		this.parentDeptName = parentDeptName;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 }
