@@ -330,7 +330,10 @@ function showSelectPanel(url,title) {
 	});
 }
 function getDeptInfo(data){
-	 $("#userDept").textbox("setValue",data[0]);
+	//alert(data[0].split("_")[1]);
+	// $("#userDept").textbox("setValue",data[0]);
+	 $("#userDept").val(data[0].split("_")[0]);
+	 $("#userDeptName").textbox("setValue",data[0].split("_")[1]);
 	 $('#deptSelectDlg').dialog('close'); 
 }
 $('#pp').pagination({
@@ -419,8 +422,9 @@ $('#pp').pagination({
             </div>
 		    <div class="fitem">
                 <label>部门:</label>
-                <input name="userDept" id="userDept" class="easyui-textbox" required="true" data-options="
-          		   prompt: 'Input something here!',
+                <input name="userDept" id="userDept" type="hidden"/>
+                <input name="userDeptName" id="userDeptName" class="easyui-textbox" required="true" data-options="
+          		   prompt: 'select a dept here!',
             		icons:[{
                   iconCls:'icon-search',
                   handler: function(e){
