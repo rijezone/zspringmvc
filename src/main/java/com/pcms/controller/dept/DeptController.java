@@ -35,8 +35,7 @@ public class DeptController extends BaseControl{
 	private DeptService deptService;
 
 	@RequestMapping("/initMain")
-	public String initMain(Model model) {
-		
+	public String initMain(Model model) {	
 		return "/views/dept/department.jsp";
 	}
 	
@@ -50,11 +49,13 @@ public class DeptController extends BaseControl{
 	public  List<DeptVO> getDatasInJSON(HttpServletRequest request, HttpServletResponse response) {
 		String queryName = request.getParameter("queryName");
 		String createTime = request.getParameter("createTime");
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("queryName",queryName==null?null:"%"+queryName+"%");
 		map.put("createTime", createTime);
-		map.put("pageSize", request.getParameter("rows"));
+		Integer rowsBegin = (Integer.parseInt(request.getParameter("page"))-1)*Integer.parseInt(request.getParameter("rows"));
+		map.put("pageSize", Integer.parseInt(request.getParameter("rows")));
 		map.put("curPage", request.getParameter("page"));
+		map.put("rowsBegin", rowsBegin);
 		List<DeptVO> list = deptService.queryObjects(map);  
 		return list; 
 	}
@@ -82,15 +83,20 @@ public class DeptController extends BaseControl{
 	@ResponseBody
     public Object del(String deptId) {
 		DeptVO deptVO = new DeptVO();
-		deptVO.setId(Integer.parseInt(deptId));
-        boolean flag = deptService.removeObject(deptVO);
         Map<String,String> map = new HashMap<String,String>();
-        if(flag){
-        	map.put("returnCode", "OK");
+        boolean flag = false;
+        if(deptId!=null&&!deptId.isEmpty()){
+    		deptVO.setDeptId(Integer.parseInt(deptId));
+            flag = deptService.removeObject(deptVO);
+            if(flag){
+            	map.put("returnCode", "OK");
+            }else{
+            	map.put("returnCode", "ERROR");
+            	map.put("errorMsg", "delete error!");
+            } 	
         }else{
-        	map.put("returnCode", "ERROR");
-        	map.put("errorMsg", "delete error!");
-        }     
+        	map.put("errorMsg", "deptId is empty");
+        }
         return map;
     }
 }

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class UserController extends BaseControl{
 
     @RequestMapping("/initMain")
     public String initMain(Model model) {
-        return "/views/operator/operator.jsp";
+        return "/views/user/user.jsp";
     }
 	
 	@RequestMapping(value="/getUsersInJSON",method=RequestMethod.POST)  
@@ -42,11 +43,13 @@ public class UserController extends BaseControl{
 		System.out.println(page+"  "+rows);
 		String queryName = request.getParameter("queryName");
 		String createTime = request.getParameter("createTime");
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("queryName",queryName==null?null:"%"+queryName+"%");
 		map.put("createTime", createTime);
-		map.put("pageSize", request.getParameter("rows"));
+		Integer rowsBegin = (Integer.parseInt(request.getParameter("page"))-1)*Integer.parseInt(request.getParameter("rows"));
+		map.put("pageSize", Integer.parseInt(request.getParameter("rows")));
 		map.put("curPage", request.getParameter("page"));
+		map.put("rowsBegin", rowsBegin);
         List<UserVO> list = userService.queryUsers(map);  
         return list;  
     } 
@@ -54,6 +57,8 @@ public class UserController extends BaseControl{
 	@RequestMapping("/userAdd")
 	@ResponseBody
     public Object userAdd(UserVO userVO) {
+        String pWord = DigestUtils.md5Hex(userVO.getUserPass());
+        userVO.setUserPass(pWord);
         boolean flag = userService.addUser(userVO);
         Map<String,String> map = new HashMap<String,String>();
         map.put("returnCode", "OK");
@@ -78,15 +83,20 @@ public class UserController extends BaseControl{
 	@ResponseBody
     public Object userDel(String userId) {
 		UserVO userVO = new UserVO();
-		userVO.setUserId(Integer.parseInt(userId));
-        boolean flag = userService.removeUser(userVO);
         Map<String,String> map = new HashMap<String,String>();
-        if(flag){
-        	map.put("returnCode", "OK");
+        boolean flag = false;
+        if(userId!=null&&!userId.isEmpty()){
+    		userVO.setUserId(Integer.parseInt(userId));
+            flag = userService.removeUser(userVO); 
+            if(flag){
+            	map.put("returnCode", "OK");
+            }else{
+            	map.put("returnCode", "ERROR");
+            } 
         }else{
-        	map.put("returnCode", "ERROR");
-        	map.put("errorMsg", "delete error!");
-        }   
+        	map.put("errorMsg", "userId is empty!");
+        }
+          
         return map;
     }
 }
