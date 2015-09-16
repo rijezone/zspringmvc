@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +58,8 @@ public class UserController extends BaseControl{
 	@RequestMapping("/userAdd")
 	@ResponseBody
     public Object userAdd(UserVO userVO) {
-        String pWord = DigestUtils.md5Hex(userVO.getUserPass());
+		Md5PasswordEncoder pEncoder = new Md5PasswordEncoder();
+        String pWord = pEncoder.encodePassword((userVO.getUserPass()), "a");
         userVO.setUserPass(pWord);
         boolean flag = userService.addUser(userVO);
         Map<String,String> map = new HashMap<String,String>();

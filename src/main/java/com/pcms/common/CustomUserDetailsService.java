@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
@@ -52,7 +53,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 			// getAuthorities() will translate the access level to the correct
 			// role type
 			// 用户名、密码、是否启用、是否被锁定、是否过期、权限
-			user = new User(u.getUserName(), u.getUserPass().toLowerCase(), true, true, true, true, getAuthorities(Integer.parseInt(u.getUserRole())));
+	        Md5PasswordEncoder pEncoder = new Md5PasswordEncoder();
+	        String pWord = pEncoder.encodePassword(u.getUserPass(), "a");
+			user = new User(u.getUserName(), u.getUserPass(), true, true, true, true, getAuthorities(Integer.parseInt(u.getUserRole())));
 		} catch (Exception e) {
 			logger.error("用户信息错误！");
 			throw new UsernameNotFoundException("异常处理：检索用户信息未通过！");
