@@ -152,7 +152,7 @@
 		if (rows.length > 0) { //选中几行的话触发事件
 			var codes = new Array();
 			for ( var i = 0; i < rows.length; i++) {
-				codes.push(rows[i].deptNo);
+				codes.push(rows[i].deptCode+"_"+rows[i].deptName);
 			}
 			parent.getDeptInfo(codes);
 		}

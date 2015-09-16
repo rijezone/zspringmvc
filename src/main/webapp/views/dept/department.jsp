@@ -23,7 +23,7 @@
         iconCls: "icon-add",
         fit:true,
         fitColumns: true,//设置为true将自动使列适应表格宽度以防止出现水平滚动,false则自动匹配大小     
-        idField: 'id', //标识列，一般设为id，可能会区分大小写，大家注意一下
+        idField: 'deptId', //标识列，一般设为id，可能会区分大小写，大家注意一下
         loadMsg: "正在努力为您加载数据", //加载数据时向用户展示的语句
         pagination: true, //显示最下端的分页工具栏
         rownumbers: true, //显示行数 1，2，3，4...
@@ -33,14 +33,15 @@
 		queryParams: {
 			queryName:""
 		},
-        columns: [[{
-            field: 'id',
-            title: 'id',
-			hidden:true,
-            width: 100
+        columns: [[
+        {
+            field: 'deptId',
+            title: '部门ID',
+            width: 200,
+            hidden:true
         },
         {
-            field: 'deptNo',
+            field: 'deptCode',
             title: '部门编码',
             width: 200
         },
@@ -50,9 +51,14 @@
             width: 200
         },
         {
-            field: 'pNo',
+            field: 'parentCode',
             title: '上级编码',
 			hidden:true,
+            width: 200
+        },
+        {
+            field: 'parentDeptName',
+            title: '上级部门',
             width: 200
         },
         {
@@ -118,7 +124,7 @@
 					  // }
                   //  });
                 //}
-				destroyUser(); 
+				removeDept(); 
             }
         },
         '-', {
@@ -249,12 +255,12 @@
             }    
         });    
     }    
-    function destroyUser(){    
+    function removeDept(){    
         var row = $('#dg').datagrid('getSelected');    
         if (row){    
-            $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){    
+            $.messager.confirm('Confirm','Are you sure you want to destroy this dept?',function(r){    
                 if (r){    
-                    $.post('del.do',{userId:row.id},function(result){
+                    $.post('del.do',{deptId:row.deptId},function(result){
 						//var result = eval('('+result+')'); 
                         if (result.returnCode=='OK'){    
                             $('#dg').datagrid('reload');    // reload the user data   
@@ -377,8 +383,9 @@ function myparser(s){
 		data-options="iconCls:'icon-save',resizable:true,modal:true">
 		<div class="ftitle">User Information</div>
 		<form id="fm" method="post" novalidate>
+			<input name="deptId" type="hidden"/>
 			<div class="fitem">
-				<label>部门编码:</label> <input name="deptNo" class="easyui-textbox"
+				<label>部门编码:</label> <input name="deptCode" class="easyui-textbox"
 					required="true">
 			</div>
 			<div class="fitem">
@@ -386,8 +393,7 @@ function myparser(s){
 					required="true">
 			</div>
 			<div class="fitem">
-				<label>上级部门:</label> <input name="parentDept" class="easyui-textbox">
-				 <input name="pNo" type="hidden"/>
+				<label>上级部门:</label> <input name="parentCode" class="easyui-textbox">
 			</div>
 			<div class="fitem">
 				<label>部门描述:</label> <input name="deptDesc" class="easyui-textbox"
